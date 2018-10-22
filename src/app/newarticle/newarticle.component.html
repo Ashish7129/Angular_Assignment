@@ -1,0 +1,18 @@
+<div class="container col-7" style="margin-top:40px">
+  <form #articleform="ngForm" (ngSubmit)=submitArticle(articleform)>
+    <div class="form-group">
+      <input type="text" style="padding:25px;" class="form-control" aria-describedby="articleHelp" placeholder="Article Title"
+        name="title" ngModel>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="What's this article about?" name="description" ngModel>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" rows="6" placeholder="Write your article (in markdown)" name="body" ngModel></textarea>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Enter Tags" name="tagsList" ngModel>
+    </div>
+    <button type="submit" class="btn btn-success float-right" style="padding:15px">Publish Article</button>
+  </form>
+</div>
