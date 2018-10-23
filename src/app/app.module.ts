@@ -30,7 +30,7 @@ import { ArticlePageComponent } from "./article-page/article-page.component";
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [],
   bootstrap: [AppComponent]
