@@ -55,9 +55,22 @@ export class ArticlesService {
       this.httpOptions
     );
   }
-  deleteArticle(slug){
-    console.log(slug
+  deleteArticle(slug) {
+    console.log(slug);
+    return this.http.delete(this.URLarticles + "/" + slug, this.httpOptions);
+  }
+
+  FavoriteArticle(slug): Observable<any> {
+    return this.http.post(
+      this.URLarticles + "/" + slug + "/favorite",
+      "",
+      this.httpOptions
     );
-    return this.http.delete(this.URLarticles+"/"+slug,this.httpOptions);
+  }
+  UnFavoriteArticle(slug): Observable<any> {
+    return this.http.delete(
+      this.URLarticles + "/" + slug + "/favorite",
+      this.httpOptions
+    );
   }
 }

@@ -15,7 +15,7 @@
       <button class="btn btn-sm pull-xs-right" [ngClass]="{ 'disabled' : isSubmitting,
                     'btn-outline-primary': !article.favorited,
                     'btn-primary': article.favorited }"
-        (onToggle)="onToggleFavorite($event)">
+        (click)="onToggleFavorite(article)">
         <i class="ion-heart"></i>
         {{article.favoritesCount}}
       </button>

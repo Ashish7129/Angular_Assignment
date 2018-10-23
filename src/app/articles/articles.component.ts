@@ -9,19 +9,20 @@ import { ArticleListConfig, Article } from "../services/models/model";
 })
 export class ArticlesComponent implements OnInit {
   results: Article[];
-  article: Article;
   @Input()
   limit: number;
+  Article: Article;
   totalPages: Array<number> = [1];
   loading = false;
   currentPage = 1;
   query: ArticleListConfig;
+  isSubmitting: boolean = false;
   constructor(private articles: ArticlesService) {}
 
   @Input()
   set config(config: ArticleListConfig) {
     if (config) {
-      console.log(config);
+      // console.log(config);
       this.query = config;
       this.currentPage = 1;
       this.runquery();
@@ -49,13 +50,25 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
-  onToggleFavorite(favorited) {
-    //  this.article.favorited = favorited;
-    console.log(favorited.target.value);
-    // if (favorited) {
-    //   this.article.favoritesCount++;
-    // } else {
-    //   this.article.favoritesCount--;
-    // }
+  onToggleFavorite(Article) {
+    console.log(Article.favorited);
+    console.log(Article.slug);
+    this.isSubmitting = true;
+    //console.log(favorited.target.innerText);
+    if (!Article.favorited) {
+      this.articles.FavoriteArticle(Article.slug).subscribe(data => {
+        console.log(data);
+        Article.favorited = true;
+        this.isSubmitting = false;
+        Article.favoritesCount++;
+      });
+    } else {
+      this.articles.UnFavoriteArticle(Article.slug).subscribe(data => {
+        console.log(data);
+        this.isSubmitting = false;
+        Article.favorited = false;
+        Article.favoritesCount--;
+      });
+    }
   }
 }
