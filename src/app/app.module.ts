@@ -10,14 +10,9 @@ import { appRoutes } from "./routes";
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { FooterComponent } from "./layout/footer/footer.component";
 import { HeaderComponent } from "./layout/header/header.component";
-import { NewarticleComponent } from './newarticle/newarticle.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ArticlePageComponent } from './article-page/article-page.component';
-
-// const routes: Routes = [
-//   { path: "", component: HomeComponent }
-//   // { path: "Home", component: HomeComponent }
-// ];
+import { NewarticleComponent } from "./newarticle/newarticle.component";
+import { ProfileComponent } from "./profile/profile.component";
+import { ArticlePageComponent } from "./article-page/article-page.component";
 
 @NgModule({
   declarations: [

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../shared/user.service";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { User } from "src/app/services/models/model";
 
 @Component({
   selector: "app-header",
@@ -9,32 +10,23 @@ import { Observable } from "rxjs";
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit {
-  userClaims: any;
+  username: string = this.userService.getUsername();
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.authenticated();
-    this.getCurrentUser();
-  }
-
-  getCurrentUser() {
-    this.userService.getUserClaims().subscribe((data: any) => {
-      this.user(data.user);
-      //console.log(this.userClaims);
-    });
   }
   authenticated() {
     if (localStorage.getItem("userToken")) {
+      this.username = this.userService.getUsername();
       return true;
     } else {
       return false;
     }
   }
-  user(data) {
-    this.userClaims = data;
-  }
   Logout() {
     localStorage.removeItem("userToken");
+    localStorage.removeItem("username");
     this.router.navigateByUrl("/login");
   }
 }

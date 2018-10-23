@@ -5,14 +5,17 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class PostarticleService {
   rootURL = "https://conduit.productionready.io/api/articles";
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Token" + " " + localStorage.getItem("userToken")
+    })
+  };
   constructor(private http: HttpClient) {}
   postArticleRequest(body) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Token" + " " + localStorage.getItem("userToken")
-      })
-    };
-    return this.http.post(this.rootURL, body, httpOptions);
+    return this.http.post(this.rootURL, body, this.httpOptions);
+  }
+  putArticleRequest(body, slug) {
+    return this.http.put(this.rootURL + "/" + slug, body, this.httpOptions);
   }
 }

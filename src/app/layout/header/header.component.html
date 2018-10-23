@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">conduit</a>
+    <a class="navbar-brand" routerLink="/">Our Stories</a>
 
     <!-- Show this for logged out users -->
     <ul class="nav navbar-nav pull-xs-right" *ngIf="!authenticated() else loggedOut">
@@ -28,7 +28,7 @@
       <ul class="nav navbar-nav pull-xs-right">
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             Home
           </a>
         </li>
@@ -46,9 +46,9 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/profile', userClaims.username]" routerLinkActive="active">
-            <img [src]="userClaims.image" *ngIf="userClaims.image" class="user-pic" />
-            {{ userClaims.username }}
+          <a class="nav-link" [routerLink]="['/profile', username]" routerLinkActive="active">
+            <!-- <img [src]="userClaims.image" *ngIf="userClaims.image" class="user-pic" /> -->
+            {{ username }}
           </a>
         </li>
 

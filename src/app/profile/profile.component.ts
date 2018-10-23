@@ -23,9 +23,10 @@ export class ProfileComponent implements OnInit {
     //console.log(this.route.url.split("/")[2]);
     this.userService
       .getprofile(this.route.url.split("/")[2])
-      .subscribe((data: Profile) => {
+      .subscribe((data: any) => {
         //console.log(data);
         this.profile = data.profile;
+        console.log(this.profile);
         this.articleConfig.filters.author = this.profile.username;
       });
     // Load the current user's data.

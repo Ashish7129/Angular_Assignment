@@ -24,7 +24,7 @@
     "ionic": "^4.2.1",
     "node": "^10.12.0",
     "node-modules": "^1.0.1",
-    "rxjs": "~6.2.0",
+    "rxjs": "^6.2.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

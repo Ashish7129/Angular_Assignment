@@ -8,11 +8,13 @@ import { ProfileComponent } from "./profile/profile.component";
 import { ArticlePageComponent } from "./article-page/article-page.component";
 
 export const appRoutes: Routes = [
-  { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
   { path: "login", component: SignInComponent },
   { path: "register", component: SignInComponent },
+  { path: "", redirectTo: "/login", pathMatch: "full" },
+  { path: "newarticle/:slug", component: NewarticleComponent },
   { path: "newarticle", component: NewarticleComponent },
   { path: "profile/:username", component: ProfileComponent },
   { path: "article/:slug", component: ArticlePageComponent },
-  { path: "", redirectTo: "home", pathMatch: "full" }
+  { path: "home", component: HomeComponent, canActivate: [AuthGuard] }
+  
 ];

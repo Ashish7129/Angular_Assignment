@@ -15,10 +15,15 @@ export class SignInComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
+    if (localStorage.getItem("userToken")) {
+      this.router.navigate(["home"]);
+    }
     if (this.router.url.split("/")[1] == "login") {
+      console.log("login");
       this.authType = "login";
       this.title = "Sign In";
     } else {
+      console.log("register");
       this.authType = "register";
       this.title = "Sign Up";
     }
@@ -28,10 +33,12 @@ export class SignInComponent implements OnInit {
       (data: any) => {
         console.log(data.user.token);
         localStorage.setItem("userToken", data.user.token);
-        this.router.navigate(["/"]);
+        localStorage.setItem("username", data.user.username);
+        this.router.navigate(["home"]);
       },
       (err: HttpErrorResponse) => {
         this.isLoginError = true;
+        this.router.navigate(["login"]);
       }
     );
   }

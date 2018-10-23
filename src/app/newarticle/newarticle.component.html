@@ -2,13 +2,13 @@
   <form #articleform="ngForm" (ngSubmit)=submitArticle(articleform)>
     <div class="form-group">
       <input type="text" style="padding:25px;" class="form-control" aria-describedby="articleHelp" placeholder="Article Title"
-        name="title" ngModel>
+        name="title" [(ngModel)]="article.title">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="What's this article about?" name="description" ngModel>
+      <input type="text" class="form-control" placeholder="What's this article about?" name="description" [(ngModel)]="article.description">
     </div>
     <div class="form-group">
-      <textarea class="form-control" rows="6" placeholder="Write your article (in markdown)" name="body" ngModel></textarea>
+      <textarea class="form-control" rows="6" placeholder="Write your article (in markdown)" name="body" [(ngModel)]="article.body"></textarea>
     </div>
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Enter Tags" name="tagsList" ngModel>

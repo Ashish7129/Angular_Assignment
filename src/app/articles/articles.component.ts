@@ -9,6 +9,7 @@ import { ArticleListConfig, Article } from "../services/models/model";
 })
 export class ArticlesComponent implements OnInit {
   results: Article[];
+  article: Article;
   @Input()
   limit: number;
   totalPages: Array<number> = [1];
@@ -46,5 +47,15 @@ export class ArticlesComponent implements OnInit {
         (val, index) => index + 1
       );
     });
+  }
+
+  onToggleFavorite(favorited) {
+    //  this.article.favorited = favorited;
+    console.log(favorited.target.value);
+    // if (favorited) {
+    //   this.article.favoritesCount++;
+    // } else {
+    //   this.article.favoritesCount--;
+    // }
   }
 }

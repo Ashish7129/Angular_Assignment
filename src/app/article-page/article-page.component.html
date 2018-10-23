@@ -1,1 +1,118 @@
-<p>hello </p>
+<div class="article-page">
+
+  <div class="banner">
+    <div class="container">
+      <h1>{{ article.title }}</h1>
+      <div class="article-meta">
+        <a [routerLink]="['/profile', article.author.username]">
+          <img [src]="article.author.image" />
+          <div class="info">
+            <a class="author">
+              {{ article.author.username }}
+            </a>
+            <span class="date">
+              {{ article.createdAt | date: 'longDate' }}
+            </span>
+          </div>
+        </a>
+      </div>
+      <span [hidden]="!(article.author.username === currentUser.username)">
+        <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/newarticle', article.slug]">
+          <i class="ion-edit"></i> Edit Article
+        </a>
+
+        <button class="btn btn-sm btn-outline-danger" [ngClass]="{disabled: isDeleting}" (click)="deleteArticle(article.slug)">
+          <i class="ion-trash-a"></i> Delete Article
+        </button>
+      </span>
+    </div>
+  </div>
+
+  <div class="container page">
+
+    <div class="row article-content">
+      <div class="col-md-12">
+
+        <div [innerHTML]="article.body"></div>
+
+        <ul class="tag-list">
+          <li *ngFor="let tag of article.tagList" class="tag-default tag-pill tag-outline">
+            {{ tag }}
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <hr />
+  <!--
+    <div class="article-actions">
+      <article-meta [article]="article">
+        <span [hidden]="!canModify">
+          <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', article.slug]">
+            <i class="ion-edit"></i> Edit Article
+          </a>
+
+          <button class="btn btn-sm btn-outline-danger" [ngClass]="{disabled: isDeleting}" (click)="deleteArticle()">
+            <i class="ion-trash-a"></i> Delete Article
+          </button>
+        </span>
+
+      </article-meta>
+    </div>
+  -->
+  <div class="row">
+    <div class="col-xs-12 col-md-8 offset-md-2">
+      <div>
+        <form class="card comment-form" (ngSubmit)="addComment(body)">
+          <fieldset [disabled]="isSubmitting">
+            <div class="card-block">
+              <textarea class="form-control" placeholder="Write a comment..." rows="3" name="body" #body></textarea>
+            </div>
+            <div class="card-footer">
+              <img [src]="currentUser.image" class="comment-author-img" />
+              <button class="btn btn-sm btn-primary" type="submit">
+                Post Comment
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <!-- <div>
+        <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
+        this article.
+      </div> -->
+      <div *ngFor="let comment of comments">
+        <div class="card">
+          <div class="card-block">
+            <p class="card-text">
+              {{ comment.body }}
+            </p>
+          </div>
+          <div class="card-footer">
+            <a class="comment-author" [routerLink]="['/profile', comment.author.username]">
+              <img [src]="comment.author.image" class="comment-author-img" />
+            </a>
+            &nbsp;
+            <a class="comment-author" [routerLink]="['/profile', comment.author.username]">
+              {{ comment.author.username }}
+            </a>
+            <span class="date-posted">
+              {{ comment.createdAt | date: 'longDate' }}
+            </span>
+            <!-- /[hidden]="!canModify" -->
+            <span class="mod-options" [hidden]="!(comment.author.username === currentUser.username)">
+              <i class="ion-trash" (click)="deleteClicked(comment)">delete</i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!--
+      </div>
+    </div>
+  -->
+    </div>
+  </div>
+</div>

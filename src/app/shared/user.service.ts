@@ -63,4 +63,8 @@ export class UserService {
       })
       .pipe(map(data => data));
   }
+
+  getUsername() {
+    return window.localStorage["username"];
+  }
 }
