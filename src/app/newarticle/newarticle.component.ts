@@ -11,7 +11,7 @@ import { ArticlesService } from "../services/articles/articles.service";
 })
 export class NewarticleComponent implements OnInit {
   slug: string;
-  article: Article;
+  article: any = { title: "", description: "", body: "" };
   constructor(
     private postarticleservice: PostarticleService,
     private route: Router,
@@ -20,11 +20,13 @@ export class NewarticleComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.slug = this.router.snapshot.params["slug"];
-    this.articleservice.getArticle(this.slug).subscribe(data => {
-      this.article = data.article;
-      console.log(this.article);
-    });
+    if (this.router.snapshot.params.hasOwnProperty("slug")) {
+      this.slug = this.router.snapshot.params["slug"];
+      this.articleservice.getArticle(this.slug).subscribe(data => {
+        this.article = data.article;
+        console.log(this.article);
+      });
+    }
   }
   submitArticle(form: NgForm) {
     this.slug = this.router.snapshot.params["slug"];
@@ -36,7 +38,15 @@ export class NewarticleComponent implements OnInit {
       }
     };
     console.log(obj);
-    if (this.slug == "") {
+    if (this.router.snapshot.params.hasOwnProperty("slug")) {
+      console.log("in put");
+      this.postarticleservice
+        .putArticleRequest(obj, this.slug)
+        .subscribe(data => {
+          console.log(data);
+          this.route.navigateByUrl("/profile/" + this.article.author.username);
+        });
+    } else {
       this.postarticleservice.postArticleRequest(obj).subscribe(
         data => {
           console.log(data);
@@ -46,13 +56,6 @@ export class NewarticleComponent implements OnInit {
           console.log(error);
         }
       );
-    } else {
-      this.postarticleservice
-        .putArticleRequest(obj, this.slug)
-        .subscribe(data => {
-          console.log(data);
-          this.route.navigateByUrl("/profile/" + this.article.author.username);
-        });
     }
   }
 }
