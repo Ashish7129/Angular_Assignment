@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 @Injectable({
   providedIn: "root"
 })
 export class PostarticleService {
-  rootURL = "https://conduit.productionready.io/api/articles";
+  rootURL = environment.ApiUrl + "/articles";
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",

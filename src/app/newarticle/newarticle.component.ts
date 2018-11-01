@@ -11,7 +11,7 @@ import { ArticlesService } from "../services/articles/articles.service";
 })
 export class NewarticleComponent implements OnInit {
   slug: string;
-  article: any = { title: "", description: "", body: "" };
+  article: any = { title: "", description: "", body: "", tagsList: [] };
   constructor(
     private postarticleservice: PostarticleService,
     private route: Router,
@@ -30,16 +30,27 @@ export class NewarticleComponent implements OnInit {
   }
   submitArticle(form: NgForm) {
     this.slug = this.router.snapshot.params["slug"];
+    let tagslist = [];
+    console.log(form.value);
+    console.log(form.value.tagsList);
+    tagslist = form.value.tagsList.split(" ");
     const obj = {
       article: {
         title: form.value.title,
         description: form.value.description,
-        body: form.value.body
+        body: form.value.body,
+        tagList: tagslist
       }
     };
     console.log(obj);
     if (this.router.snapshot.params.hasOwnProperty("slug")) {
       console.log("in put");
+      let totaltags = this.article.tagList;
+      console.log(totaltags);
+      totaltags.forEach(element => {
+        obj.article.tagList.push(element);
+      });
+      console.log(obj);
       this.postarticleservice
         .putArticleRequest(obj, this.slug)
         .subscribe(data => {

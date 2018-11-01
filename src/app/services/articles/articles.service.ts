@@ -4,13 +4,14 @@ import { URLSearchParams } from "@angular/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ArticleListConfig } from "../models/model";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root"
 })
 export class ArticlesService {
-  URLarticles: string = "https://conduit.productionready.io/api/articles";
-  URLtags: string = "https://conduit.productionready.io/api/tags";
+  URLarticles: string = environment.ApiUrl + "/articles";
+  URLtags: string = environment.ApiUrl + "/tags";
   httpOptions: any = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
