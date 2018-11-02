@@ -33,7 +33,7 @@ export class NewarticleComponent implements OnInit {
     let tagslist = [];
     console.log(form.value);
     console.log(form.value.tagsList);
-    tagslist = form.value.tagsList ? form.value.tagsList.split(" ") : [];
+    tagslist = form.value.tagsList ? form.value.tagsList.split(" ") : null;
     const obj = {
       article: {
         title: form.value.title,
@@ -44,7 +44,6 @@ export class NewarticleComponent implements OnInit {
     };
     console.log(obj);
     if (this.router.snapshot.params.hasOwnProperty("slug")) {
-      console.log("in put");
       let totaltags =
         this.article.tagList.length > 0 ? this.article.tagList : [];
       console.log(totaltags);
